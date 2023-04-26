@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,6 +55,10 @@ public class UserServiceImpl implements UserService {
         }
         else {
             userRole = optionalUserRole.get();
+        }
+        if (secUser.getUserRoles() == null){
+            Set<UserRole> userRoleSet = new HashSet<>();
+            secUser.setUserRoles(userRoleSet);
         }
         secUser.getUserRoles().add(userRole);
         return userRepository.save(secUser);
