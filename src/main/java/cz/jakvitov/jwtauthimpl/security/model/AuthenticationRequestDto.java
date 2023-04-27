@@ -1,15 +1,15 @@
 package cz.jakvitov.jwtauthimpl.security.model;
 
-public class AuthorizationRequestDto {
+public class AuthenticationRequestDto {
 
     private String userName;
 
     private String password;
 
-    public AuthorizationRequestDto() {
+    public AuthenticationRequestDto() {
     }
 
-    public AuthorizationRequestDto(String userName, String password) {
+    public AuthenticationRequestDto(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

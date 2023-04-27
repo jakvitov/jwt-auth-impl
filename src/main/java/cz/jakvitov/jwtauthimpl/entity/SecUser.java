@@ -53,4 +53,13 @@ public class SecUser {
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
+
+    @Override
+    public String toString() {
+        return "SecUser{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userRoles=" + userRoles +
+                '}';
+    }
 }
