@@ -17,8 +17,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                //Dev. only disabled csrf to allow postman requests
                 .csrf().disable()
-                .cors().disable()
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                 );
@@ -26,11 +26,9 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    AuthenticationManager authenticationManager(
-            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authManagerSetupBean(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
 
     //Only for development and testing we do not encode passwords
     @Bean
