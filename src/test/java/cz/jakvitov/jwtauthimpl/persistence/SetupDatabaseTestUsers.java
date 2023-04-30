@@ -16,18 +16,20 @@ public class SetupDatabaseTestUsers {
     @Autowired
     UserService userService;
 
+    private final String username = "user";
+    private final String adminname = "admin";
+
     @Test
-    @Transactional
     @Disabled
     public void setupUsersInDatabase(){
         SecUser user = new SecUser();
         SecUser admin = new SecUser();
 
-        user.setUserName("user");
-        user.setPassword("user");
+        user.setUserName(username);
+        user.setPassword(username);
 
-        admin.setUserName("admin");
-        admin.setPassword("admin");
+        admin.setUserName(adminname);
+        admin.setPassword(adminname);
 
         UserRole userRole = new UserRole(UserRoleEnum.USER);
         UserRole adminRole = new UserRole(UserRoleEnum.ADMIN);
@@ -38,6 +40,13 @@ public class SetupDatabaseTestUsers {
         userService.setNewRoleToUser(user, UserRoleEnum.USER);
         userService.setNewRoleToUser(admin, UserRoleEnum.ADMIN);
         userService.setNewRoleToUser(admin, UserRoleEnum.USER);
+    }
+
+    @Test
+    @Disabled
+    public void deleteTestUsers(){
+        userService.deleteUserById(username);
+        userService.deleteUserById(adminname);
     }
 
 }
