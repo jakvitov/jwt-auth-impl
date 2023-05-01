@@ -1,7 +1,9 @@
 package cz.jakvitov.jwtauthimpl.security.configuration;
 
+import cz.jakvitov.jwtauthimpl.entity.UserRole;
 import cz.jakvitov.jwtauthimpl.security.UserRoleEnum;
 import cz.jakvitov.jwtauthimpl.security.filters.JwtAuthFilter;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +31,8 @@ public class SecurityConfiguration {
                 //Dev. only disabled csrf to allow postman requests
                 .csrf().disable()
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/user/**").authenticated()
+                        .requestMatchers("/admin/**").hasAuthority(UserRoleEnum.ADMIN.getTextValue())
+                        .requestMatchers("/user/**").hasAnyAuthority(UserRoleEnum.USER.getTextValue(), UserRoleEnum.ADMIN.getTextValue())
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll()
                 );
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
