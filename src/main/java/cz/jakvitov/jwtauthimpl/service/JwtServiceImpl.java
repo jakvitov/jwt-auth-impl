@@ -24,7 +24,7 @@ public class JwtServiceImpl implements JwtService{
 
     @Override
     public Date extractExpiration(String token) {
-        return extractExpiration(token);
+        return extractClaim(token, Claims::getExpiration);
     }
 
     @Override
@@ -46,6 +46,7 @@ public class JwtServiceImpl implements JwtService{
     @Override
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("Roles", userDetails.getAuthorities());
         return createToken(claims, userDetails.getUsername());
     }
 

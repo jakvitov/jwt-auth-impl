@@ -2,8 +2,8 @@ package cz.jakvitov.jwtauthimpl.security;
 
 public enum UserRoleEnum {
 
-    USER("ROLE_USER"),
-    ADMIN("ROLE_ADMIN");
+    USER("USER"),
+    ADMIN("ADMIN");
 
     UserRoleEnum (String s){
         this.textValue = s;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class AuthenticationController {
 
@@ -25,7 +26,7 @@ public class AuthenticationController {
     UserDetailsService userDetailsService;
 
     @PostMapping("/auth")
-    public ResponseEntity<?> loginConntroller(@RequestBody AuthenticationRequestDto authenticationRequestDto){
+    public ResponseEntity<String> loginConntroller(@RequestBody AuthenticationRequestDto authenticationRequestDto){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequestDto.getUserName(), authenticationRequestDto.getPassword()));
         }
